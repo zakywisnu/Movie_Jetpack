@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/movieFragment">
+
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.zeroemotion.bfaa_kotlin_tmdb.view.MovieFragment"
+        android:label="Movie"
+        tools:layout="@layout/fragment_movie" >
+        <action
+            android:id="@+id/actionDetailMovie"
+            app:destination="@id/detailMovieFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvShowFragment"
+        android:name="com.zeroemotion.bfaa_kotlin_tmdb.view.TvShowFragment"
+        android:label="Tv Show"
+        tools:layout="@layout/fragment_tv_show" >
+        <action
+            android:id="@+id/actionDetailTvShow"
+            app:destination="@id/detailTvShowFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailMovieFragment"
+        android:name="com.zeroemotion.bfaa_kotlin_tmdb.view.DetailMovieFragment"
+        android:label="fragment_detail_movie"
+        tools:layout="@layout/fragment_detail_movie" >
+        <action
+            android:id="@+id/actionMovieList"
+            app:destination="@id/movieFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
+        <argument
+            android:name="movieId"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailTvShowFragment"
+        android:name="com.zeroemotion.bfaa_kotlin_tmdb.view.DetailTvShowFragment"
+        android:label="fragment_detail_tv_show"
+        tools:layout="@layout/fragment_detail_tv_show" >
+        <action
+            android:id="@+id/actionTvShowList"
+            app:destination="@id/tvShowFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
+        <argument
+            android:name="tvId"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
+</navigation>

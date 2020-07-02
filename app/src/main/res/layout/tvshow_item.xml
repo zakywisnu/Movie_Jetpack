@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="tvShow"
+            type="com.zeroemotion.bfaa_kotlin_tmdb.model.TvShow" />
+        <variable
+            name="listener"
+            type="com.zeroemotion.bfaa_kotlin_tmdb.util.CustomOnClick" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="@{listener::onViewClicked}"
+        android:orientation="horizontal">
+
+        <TextView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:id="@+id/tvId"
+            android:visibility="gone"
+            android:text="@{String.valueOf(tvShow.id)}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/tvShowImageView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:scaleType="fitXY"
+            android:imageUrl="@{tvShow.posterPath}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            app:layout_constraintBottom_toBottomOf="@id/tvShowImageView"
+            app:layout_constraintStart_toStartOf="@id/tvShowImageView"
+            app:layout_constraintEnd_toEndOf="@id/tvShowImageView"
+            android:layout_margin="16dp"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:maxLength="15"
+            android:text="@{tvShow.name}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
