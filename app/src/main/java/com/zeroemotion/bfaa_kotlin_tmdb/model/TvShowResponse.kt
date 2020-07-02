@@ -8,5 +8,5 @@ data class TvShowResponse(
     val results: ArrayList<Movie>?,
 
     @SerializedName("total_results")
-    val totalResults: Int?gi
+    val totalResults: Int?
 )
