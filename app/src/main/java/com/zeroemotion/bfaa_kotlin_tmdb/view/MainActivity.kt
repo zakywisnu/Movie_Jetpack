@@ -2,7 +2,9 @@ package com.zeroemotion.bfaa_kotlin_tmdb.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -26,6 +28,14 @@ class MainActivity : AppCompatActivity() {
         ).build()
         setupActionBarWithNavController(navController,appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener{_,nd: NavDestination,_ ->
+            when(nd.id){
+                R.id.detailMovieFragment,
+                R.id.detailTvShowFragment -> navView.visibility = View.GONE
+                else -> navView.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

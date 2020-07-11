@@ -8,16 +8,11 @@ import com.zeroemotion.bfaa_kotlin_tmdb.model.TvShow
 
 class DetailViewModel: ViewModel() {
 
-    val movieLiveData = MutableLiveData<Movie>()
-    val tvLiveData = MutableLiveData<TvShow>()
 
-    fun fetchMovie(id: Int){
-        val movie = DataDummy.getMovieById(id)
-        movieLiveData.value = movie
-    }
+    fun getDetailMovie(id: Int?): Movie? = DataDummy.getMovieById(id)
+    fun getDetailTv(tvid: Int?): TvShow? = DataDummy.getTvShowById(tvid)
 
-    fun fetchTV(id: Int){
-        val tv = DataDummy.getTvShowById(id)
-        tvLiveData.value = tv
-    }
+
+
+
 }

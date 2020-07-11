@@ -46,7 +46,6 @@ class MovieAdapter(val movieList: ArrayList<Movie>) :
     }
 
     override fun onViewClicked(v: View) {
-        Toast.makeText(v.context,"OnViewClicked",Toast.LENGTH_SHORT).show()
         val movieId = v.movieId.text.toString().toInt()
         val action = MovieFragmentDirections.actionDetailMovie()
         action.movieId = movieId

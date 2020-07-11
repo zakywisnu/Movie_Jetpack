@@ -11,7 +11,15 @@ import androidx.lifecycle.ViewModelProviders
 
 import com.zeroemotion.bfaa_kotlin_tmdb.R
 import com.zeroemotion.bfaa_kotlin_tmdb.databinding.FragmentDetailTvShowBinding
+import com.zeroemotion.bfaa_kotlin_tmdb.model.TvShow
 import com.zeroemotion.bfaa_kotlin_tmdb.viewmodel.DetailViewModel
+import kotlinx.android.synthetic.main.fragment_detail_movie.*
+import kotlinx.android.synthetic.main.fragment_detail_movie.detailOverview
+import kotlinx.android.synthetic.main.fragment_detail_movie.detailPoster
+import kotlinx.android.synthetic.main.fragment_detail_movie.detailRating
+import kotlinx.android.synthetic.main.fragment_detail_movie.detailRelease
+import kotlinx.android.synthetic.main.fragment_detail_movie.detailTitle
+import kotlinx.android.synthetic.main.fragment_detail_tv_show.*
 
 /**
  * A simple [Fragment] subclass.
@@ -38,17 +46,16 @@ class DetailTvShowFragment : Fragment() {
         arguments?.let {
             tvId = DetailTvShowFragmentArgs.fromBundle(it).tvId
         }
-        viewModel.fetchTV(tvId)
-
-        observeViewModel()
+        setTvData(viewModel.getDetailTv(tvId))
     }
 
-    private fun observeViewModel() {
-        viewModel.tvLiveData.observe(viewLifecycleOwner, Observer { tvDetail ->
-            tvDetail?.let {
-                dataBinding.tvShow = tvDetail
-            }
-        })
+    private fun setTvData(tv: TvShow?) {
+        detailTitleTv.text = tv?.name
+        detailReleaseTv.text = tv?.firstAirDate
+        detailRatingTv.text = tv?.voteAverage
+        detailOverviewTv.text = tv?.overview
+        tv?.posterPath?.let { detailPosterTv.setImageResource(it) }
     }
+
 
 }

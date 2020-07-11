@@ -35,30 +35,14 @@ class TvShowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProviders.of(this).get(TvShowViewModel::class.java)
-        viewModel.fetch()
-
+        val tvShow = viewModel.getTvShow()
+        tvAdapter.updateTvList(tvShow)
         rvTvShow.apply {
             layoutManager = GridLayoutManager(context,2)
             adapter = tvAdapter
         }
 
-        observeViewModel()
     }
 
-    private fun observeViewModel() {
-        viewModel.tvShow.observe(viewLifecycleOwner, Observer { tvShow ->
-            tvShow?.let {
-                rvTvShow.visibility = View.VISIBLE
-                tvAdapter.updateTvList(tvShow)
-                tvLoading.visibility = View.GONE
-            }
-        })
-
-        viewModel.tvLoading.observe(viewLifecycleOwner, Observer { tvLoader ->
-            tvLoader?.let {
-                tvLoading.visibility = if(it) View.VISIBLE else View.GONE
-            }
-        })
-    }
 
 }
