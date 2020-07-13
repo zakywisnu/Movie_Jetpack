@@ -297,7 +297,7 @@ object DataDummy {
         )
     }
 
-    fun getMovieById(id: Int): Movie? {
+    fun getMovieById(id: Int?): Movie? {
         for (movie in generateDummyMovies()) {
             if (id == movie.id) {
                 return movie
@@ -306,7 +306,7 @@ object DataDummy {
         return null
     }
 
-    fun getTvShowById(id: Int): TvShow? {
+    fun getTvShowById(id: Int?): TvShow? {
 
         for (movie in generateDummyTvShow()) {
             if (id == movie.id) {

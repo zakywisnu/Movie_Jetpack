@@ -12,5 +12,4 @@ data class TvShow(
     val firstAirDate: String?,
     val voteAverage: String?
 //    val backdropPath: String?,
-//    val mediaType: String?
 ):Parcelable

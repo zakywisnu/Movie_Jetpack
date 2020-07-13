@@ -7,15 +7,7 @@ import com.zeroemotion.bfaa_kotlin_tmdb.model.DataDummy
 import com.zeroemotion.bfaa_kotlin_tmdb.model.Movie
 
 class MovieViewModel : ViewModel() {
-    val movie = MutableLiveData<List<Movie>>()
-    val movieLoading = MutableLiveData<Boolean>()
 
-
-    fun fetch() {
-
-        val movies = DataDummy.generateDummyMovies()
-        movie.value = movies
-        movieLoading.value = false
-    }
+    fun getMovies(): ArrayList<Movie> = DataDummy.generateDummyMovies()
 
 }

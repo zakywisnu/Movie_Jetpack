@@ -35,29 +35,15 @@ class MovieFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
 
-        viewModel.fetch()
+        val movies = viewModel.getMovies()
+        movieAdapter.updateMovieList(movies)
         rvMovie.apply {
             layoutManager = GridLayoutManager(context,2)
             adapter = movieAdapter
         }
 
-        observeViewModel()
     }
 
-    private fun observeViewModel() {
-        viewModel.movie.observe(viewLifecycleOwner, Observer {movie ->
-            movie?.let {
-                rvMovie.visibility = View.VISIBLE
-                movieAdapter.updateMovieList(movie)
-            }
-        })
-
-        viewModel.movieLoading.observe(viewLifecycleOwner, Observer { loading ->
-            loading?.let {
-                movieLoading.visibility = if(it) View.VISIBLE else View.GONE
-            }
-        })
-    }
 
 
 }

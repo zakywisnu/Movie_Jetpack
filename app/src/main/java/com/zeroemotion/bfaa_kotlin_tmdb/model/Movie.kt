@@ -13,5 +13,4 @@ data class Movie(
     val releaseDate: String?,
     val voteAverage: String?
 //    val backdropPath: String?,
-//    val mediaType: String?
 ): Parcelable

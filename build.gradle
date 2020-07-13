@@ -5,10 +5,12 @@ buildscript {
     ext.lifecycle_version = '1.1.1'
     ext.support_version = '20.0.0'
     ext.glide_version = '4.10.0'
-    ext.retrofit_version = '2.3.0'
+    ext.espressoVersion = '3.2.0'
+    ext.retrofit_version = '2.6.2'
+    ext.androidXTestVersion = '1.2.0'
     ext.rxjava_version = '2.1.1'
     ext.room_version = '2.3.0-alpha01'
-    ext.nav_version = '2.3.0-rc01'
+    ext.nav_version = '2.3.0'
     ext.preference_version = '1.1.1'
     repositories {
         google()
@@ -16,7 +18,7 @@ buildscript {
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.3'
+        classpath 'com.android.tools.build:gradle:4.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
