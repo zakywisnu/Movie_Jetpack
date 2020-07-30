@@ -10,10 +10,14 @@ android {
 
     defaultConfig {
         applicationId "com.zeroemotion.bfaa_kotlin_tmdb"
-        minSdkVersion 21
+        minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
+        buildConfigField "String", "API_KEY", "\"c3141d1a29379bd03dceb243cd2a5942\""
+        buildConfigField "String", "BASE_IMAGE_URL", "\"https://image.tmdb.org/t/p/w500\""
+        vectorDrawables.useSupportLibrary = true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -28,8 +32,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures{
+    buildFeatures {
         dataBinding = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
 }
@@ -38,7 +46,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.3.0'
+    implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     //Support
@@ -53,7 +61,7 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
 
     //Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
@@ -69,19 +77,44 @@ dependencies {
 
     //RxJava
     implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxjava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
 
     //Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+
+    // Koin AndroidX Scope feature
+    implementation "org.koin:koin-androidx-scope:$koinVersion"
+
+    // Koin AndroidX ViewModel feature
+    implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
+
+    // Koin AndroidX Fragment Factory (unstable version)
+    implementation "org.koin:koin-androidx-fragment:$koinVersion"
+
+    // Koin for Kotlin
+    implementation "org.koin:koin-core:$koinVersion"
+
+    // Koin Extended & experimental features
+    implementation "org.koin:koin-core-ext:$koinVersion"
+
+    // Koin for Unit tests
+    testImplementation "org.koin:koin-test:$koinVersion"
+
+    //mockito
+    testImplementation "androidx.arch.core:core-testing:$archLifecycleVersion"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
 
     //Preference
     implementation "androidx.preference:preference:$preference_version"
+
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
     testImplementation 'org.mockito:mockito-core:2.28.2'
     androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+    implementation "androidx.test.espresso:espresso-idling-resource:$idleResourceVersion"
     androidTestImplementation "androidx.test:rules:$androidXTestVersion"
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

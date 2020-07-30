@@ -2,10 +2,13 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="tvShow"
-            type="com.zeroemotion.bfaa_kotlin_tmdb.model.TvShow" />
+            type="com.zeroemotion.bfaa_kotlin_tmdb.data.model.TvShow" />
+
         <variable
             name="listener"
             type="com.zeroemotion.bfaa_kotlin_tmdb.util.CustomOnClick" />
@@ -18,37 +21,38 @@
         android:orientation="horizontal">
 
         <TextView
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
             android:id="@+id/tvId"
-            android:visibility="gone"
-            android:text="@{String.valueOf(tvShow.id)}"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(tvShow.id)}"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/tvShowImageView"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:adjustViewBounds="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:scaleType="fitXY"
             android:imageUrl="@{tvShow.posterPath}"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            app:layout_constraintBottom_toBottomOf="@id/tvShowImageView"
-            app:layout_constraintStart_toStartOf="@id/tvShowImageView"
-            app:layout_constraintEnd_toEndOf="@id/tvShowImageView"
-            android:layout_margin="16dp"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:maxLength="15"
-            android:text="@{tvShow.name}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="16dp"-->
+<!--            android:gravity="center"-->
+<!--            android:maxLength="15"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:text="@{tvShow.name}"-->
+<!--            android:textSize="18sp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/tvShowImageView"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/tvShowImageView"-->
+<!--            app:layout_constraintStart_toStartOf="@id/tvShowImageView" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

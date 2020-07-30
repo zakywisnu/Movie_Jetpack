@@ -7,7 +7,7 @@
     <data>
         <variable
             name="tvShow"
-            type="com.zeroemotion.bfaa_kotlin_tmdb.model.TvShow" />
+            type="com.zeroemotion.bfaa_kotlin_tmdb.data.model.TvShow" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -18,7 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".view.DetailTvShowFragment">
+            tools:context=".ui.detail.DetailTvShowFragment">
 
             <ImageView
                 android:id="@+id/detailPosterTv"

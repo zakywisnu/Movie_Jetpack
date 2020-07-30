@@ -1,6 +1,7 @@
 package com.zeroemotion.bfaa_kotlin_tmdb.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.zeroemotion.bfaa_kotlin_tmdb.ui.tvshow.TvShowViewModel
 import org.junit.Test
 
 import org.junit.Assert.*
