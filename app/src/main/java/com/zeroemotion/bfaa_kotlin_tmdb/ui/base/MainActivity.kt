@@ -1,8 +1,8 @@
-package com.zeroemotion.bfaa_kotlin_tmdb.view
+package com.zeroemotion.bfaa_kotlin_tmdb.ui.base
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        navController = Navigation.findNavController(this,R.id.fragment)
+        navController = Navigation.findNavController(this, R.id.fragment)
 
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
@@ -26,11 +26,11 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration.Builder(
             R.id.movieFragment, R.id.tvShowFragment
         ).build()
-        setupActionBarWithNavController(navController,appBarConfiguration)
+        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        navController.addOnDestinationChangedListener{_,nd: NavDestination,_ ->
-            when(nd.id){
+        navController.addOnDestinationChangedListener { _, nd: NavDestination, _ ->
+            when (nd.id) {
                 R.id.detailMovieFragment,
                 R.id.detailTvShowFragment -> navView.visibility = View.GONE
                 else -> navView.visibility = View.VISIBLE
@@ -39,6 +39,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return NavigationUI.navigateUp(navController,null)
+        return NavigationUI.navigateUp(navController, null)
     }
 }

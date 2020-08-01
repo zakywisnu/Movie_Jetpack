@@ -1,25 +1,22 @@
-package com.zeroemotion.bfaa_kotlin_tmdb.adapter
+package com.zeroemotion.bfaa_kotlin_tmdb.ui.movie
 
-import android.content.Context
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.zeroemotion.bfaa_kotlin_tmdb.R
+import com.zeroemotion.bfaa_kotlin_tmdb.data.model.Movie
 import com.zeroemotion.bfaa_kotlin_tmdb.databinding.MovieItemBinding
-import com.zeroemotion.bfaa_kotlin_tmdb.model.Movie
 import com.zeroemotion.bfaa_kotlin_tmdb.util.CustomOnClick
 import com.zeroemotion.bfaa_kotlin_tmdb.util.getProgressDrawable
 import com.zeroemotion.bfaa_kotlin_tmdb.util.loadImage
-import com.zeroemotion.bfaa_kotlin_tmdb.view.MovieFragmentDirections
 import kotlinx.android.synthetic.main.movie_item.view.*
 
-class MovieAdapter(val movieList: ArrayList<Movie>) :
+class MovieAdapter(private val movieList: ArrayList<Movie>) :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(), CustomOnClick {
+
     fun updateMovieList(newMovieList: List<Movie>) {
         movieList.clear()
         movieList.addAll(newMovieList)
@@ -30,7 +27,9 @@ class MovieAdapter(val movieList: ArrayList<Movie>) :
         val inflater = LayoutInflater.from(parent.context)
         val view =
             DataBindingUtil.inflate<MovieItemBinding>(inflater, R.layout.movie_item, parent, false)
-        return MovieViewHolder(view)
+        return MovieViewHolder(
+            view
+        )
     }
 
     override fun getItemCount() = movieList.size

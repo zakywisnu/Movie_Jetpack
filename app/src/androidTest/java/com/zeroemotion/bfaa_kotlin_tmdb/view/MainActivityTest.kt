@@ -5,13 +5,11 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.NavigationViewActions
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.rule.ActivityTestRule
 import com.zeroemotion.bfaa_kotlin_tmdb.R
-import com.zeroemotion.bfaa_kotlin_tmdb.model.DataDummy
-import org.junit.Assert.*
+import com.zeroemotion.bfaa_kotlin_tmdb.ui.base.MainActivity
 import org.junit.Rule
 import org.junit.Test
 
