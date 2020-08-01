@@ -13,8 +13,7 @@
         <action
             android:id="@+id/actionDetailMovie"
             app:destination="@id/detailMovieFragment"
-            app:enterAnim="@android:anim/slide_out_right"
-            app:exitAnim="@android:anim/slide_in_left" />
+            app:enterAnim="@anim/fragment_fade_enter" />
     </fragment>
     <fragment
         android:id="@+id/tvShowFragment"
@@ -24,19 +23,13 @@
         <action
             android:id="@+id/actionDetailTvShow"
             app:destination="@id/detailTvShowFragment"
-            app:enterAnim="@android:anim/slide_out_right"
-            app:exitAnim="@android:anim/slide_in_left" />
+            app:enterAnim="@anim/fragment_fade_enter" />
     </fragment>
     <fragment
         android:id="@+id/detailMovieFragment"
         android:name="com.zeroemotion.bfaa_kotlin_tmdb.ui.detail.DetailMovieFragment"
         android:label="fragment_detail_movie"
         tools:layout="@layout/fragment_detail_movie" >
-        <action
-            android:id="@+id/actionMovieList"
-            app:destination="@id/movieFragment"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right" />
         <argument
             android:name="movieId"
             android:defaultValue="0"
@@ -47,11 +40,6 @@
         android:name="com.zeroemotion.bfaa_kotlin_tmdb.ui.detail.DetailTvShowFragment"
         android:label="fragment_detail_tv_show"
         tools:layout="@layout/fragment_detail_tv_show" >
-        <action
-            android:id="@+id/actionTvShowList"
-            app:destination="@id/tvShowFragment"
-            app:enterAnim="@android:anim/slide_out_right"
-            app:exitAnim="@android:anim/slide_in_left" />
         <argument
             android:name="tvId"
             android:defaultValue="0"

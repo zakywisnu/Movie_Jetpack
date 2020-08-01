@@ -4,15 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.zeroemotion.bfaa_kotlin_tmdb.data.model.Movie
 import com.zeroemotion.bfaa_kotlin_tmdb.data.model.TvShow
-import com.zeroemotion.bfaa_kotlin_tmdb.data.source.repository.MovieDataSource
+import com.zeroemotion.bfaa_kotlin_tmdb.data.source.repository.MovieRepository
 
-class DetailViewModel(private val movieDataSource: MovieDataSource, private val id: Int) :
+class DetailViewModel(private val movieRepository: MovieRepository, private val id: Int) :
     ViewModel() {
 
-    private fun getMovieRepo() = movieDataSource.fetchMovieDetail(id)
+    private fun getMovieRepo() = movieRepository.fetchMovieDetail(id)
     fun getMovieDetail(): LiveData<Movie> = getMovieRepo()
 
-    private fun getTvRepo() = movieDataSource.fetchTvDetail(id)
+    private fun getTvRepo() = movieRepository.fetchTvDetail(id)
     fun getTvDetail(): LiveData<TvShow> = getTvRepo()
 
 }

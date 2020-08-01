@@ -8,7 +8,6 @@ import kotlinx.android.parcel.Parcelize
 data class Movie(
     val id: Int?,
     val title: String?,
-    val director: String?,
     val overview: String?,
     @SerializedName("poster_path")
     val posterPath: String?,
