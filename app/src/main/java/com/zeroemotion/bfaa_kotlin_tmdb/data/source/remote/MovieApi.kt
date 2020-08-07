@@ -19,6 +19,6 @@ interface MovieApi {
     @GET("movie/{movie_id}?api_key=$API_KEY")
     fun getMovieDetail(@Path("movie_id") movie_id: Int): Observable<Movie>
 
-    @GET("movie/{tv_id}?api_key=$API_KEY")
+    @GET("tv/{tv_id}?api_key=$API_KEY")
     fun getTvDetail(@Path("tv_id") tv_id: Int): Observable<TvShow>
 }

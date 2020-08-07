@@ -1,8 +1,8 @@
 package com.zeroemotion.bfaa_kotlin_tmdb.di
 
 import com.zeroemotion.bfaa_kotlin_tmdb.data.source.remote.RemoteDataSource
-import com.zeroemotion.bfaa_kotlin_tmdb.data.source.repository.MovieDataSource
 import com.zeroemotion.bfaa_kotlin_tmdb.data.source.repository.MovieRepository
+import com.zeroemotion.bfaa_kotlin_tmdb.data.source.repository.MovieRepositoryImpl
 import com.zeroemotion.bfaa_kotlin_tmdb.ui.detail.DetailViewModel
 import com.zeroemotion.bfaa_kotlin_tmdb.ui.movie.MovieViewModel
 import com.zeroemotion.bfaa_kotlin_tmdb.ui.tvshow.TvShowViewModel
@@ -15,6 +15,6 @@ val module = module {
     viewModel { TvShowViewModel(get()) }
     viewModel { (id: Int) -> DetailViewModel(get(), id) }
 
-    factory<MovieDataSource> { MovieRepository(get()) }
+    factory<MovieRepository> { MovieRepositoryImpl(get()) }
     factory { RemoteDataSource() }
 }

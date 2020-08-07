@@ -17,95 +17,96 @@ class RemoteDataSource {
     private val movieService = retrofit.create(MovieApi::class.java)
     private val disposable = CompositeDisposable()
 
-    private val _networkState: MutableLiveData<NetworkState> = MutableLiveData()
-    val networkState: LiveData<NetworkState>
-        get() = _networkState
-
-    private val _movieResponse: MutableLiveData<Response<Movie>> = MutableLiveData()
-    val movieResponse: LiveData<Response<Movie>>
-        get() = _movieResponse
-
-    private val _movieDetail: MutableLiveData<Movie> = MutableLiveData()
-    val movieDetail: LiveData<Movie>
-        get() = _movieDetail
-
-    private val _tvResponse: MutableLiveData<Response<TvShow>> = MutableLiveData()
-    val tvResponse: LiveData<Response<TvShow>>
-        get() = _tvResponse
-
-    private val _tvDetail: MutableLiveData<TvShow> = MutableLiveData()
-    val tvDetail: LiveData<TvShow>
-        get() = _tvDetail
-
-    fun getMovieList() {
+    fun getMovieList(): LiveData<NetworkState<List<Movie>>> {
         EspressoIdlingResource.increment()
-        _networkState.postValue(NetworkState.LOADING)
+        val movieResult = MutableLiveData<NetworkState<List<Movie>>>()
         disposable.add(
             movieService.getMovie()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    _movieResponse.postValue(it)
-                    _networkState.postValue(NetworkState.LOADED)
-                    EspressoIdlingResource.decrement()
+                .subscribe({ movie ->
+                    movie?.let {
+                        movieResult.value = NetworkState.success(it.results)
+                        EspressoIdlingResource.decrement()
+                    }
                 }, {
-                    _networkState.postValue(NetworkState.ERROR)
-                    EspressoIdlingResource.decrement()
+                    it.message?.let { its ->
+                        val list = ArrayList<Movie>()
+                        movieResult.value = NetworkState.error(its, list)
+                        EspressoIdlingResource.decrement()
+                    }
                 })
         )
+        return movieResult
     }
 
-    fun getMovieDetail(id: Int) {
+    fun getMovieDetail(id: Int): LiveData<NetworkState<Movie>>{
         EspressoIdlingResource.increment()
-        _networkState.postValue(NetworkState.LOADING)
+        val movies = MutableLiveData<NetworkState<Movie>>()
         disposable.add(
             movieService.getMovieDetail(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    _movieDetail.postValue(it)
-                    _networkState.postValue(NetworkState.LOADED)
-                    EspressoIdlingResource.decrement()
+                .subscribe({movie ->
+                    movie?.let {
+                        movies.value = NetworkState.success(it)
+                        EspressoIdlingResource.decrement()
+                    }
                 }, {
-                    _networkState.postValue(NetworkState.ERROR)
-                    EspressoIdlingResource.decrement()
+                    it.message?.let { its ->
+                        val movies2 = Movie(1,"","","","","")
+                        movies.value = NetworkState.error(its, movies2)
+                        EspressoIdlingResource.decrement()
+                    }
                 })
         )
+        return movies
     }
 
-    fun getTvList() {
+    fun getTvList(): LiveData<NetworkState<List<TvShow>>> {
         EspressoIdlingResource.increment()
-        _networkState.postValue(NetworkState.LOADING)
+        val tvResult = MutableLiveData<NetworkState<List<TvShow>>>()
         disposable.add(
             movieService.getTvShow()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    _tvResponse.postValue(it)
-                    _networkState.postValue(NetworkState.LOADED)
-                    EspressoIdlingResource.decrement()
+                .subscribe({ tvs ->
+                    tvs?.let {
+                        tvResult.value = NetworkState.success(it.results)
+                        EspressoIdlingResource.decrement()
+                    }
                 }, {
-                    _networkState.postValue(NetworkState.ERROR)
-                    EspressoIdlingResource.decrement()
+                    it.message?.let { it1 ->
+                        val list = ArrayList<TvShow>()
+                        tvResult.value = NetworkState.error(it1, list)
+                        EspressoIdlingResource.decrement()
+                    }
                 })
         )
+        return tvResult
     }
 
-    fun getTvDetail(id: Int) {
+    fun getTvDetail(id: Int) : LiveData<NetworkState<TvShow>> {
         EspressoIdlingResource.increment()
-        _networkState.postValue(NetworkState.LOADING)
+        val tvShow = MutableLiveData<NetworkState<TvShow>>()
         disposable.add(
             movieService.getTvDetail(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    _tvDetail.postValue(it)
-                    _networkState.postValue(NetworkState.LOADED)
-                    EspressoIdlingResource.decrement()
+                .subscribe({tvs ->
+                    tvs.let {
+                        tvShow.value = NetworkState.success(it)
+                        EspressoIdlingResource.decrement()
+                    }
+
                 }, {
-                    _networkState.postValue(NetworkState.ERROR)
+                    it.message?.let { its ->
+                    val tvshows = TvShow(1,"","","","","")
+                   tvShow.value = NetworkState.error(its, tvshows)
                     EspressoIdlingResource.decrement()
+                }
                 })
         )
+        return tvShow
     }
 }
