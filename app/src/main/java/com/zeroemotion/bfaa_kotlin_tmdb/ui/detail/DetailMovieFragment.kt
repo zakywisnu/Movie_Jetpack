@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.zeroemotion.bfaa_kotlin_tmdb.R
 import com.zeroemotion.bfaa_kotlin_tmdb.data.model.Movie
+import com.zeroemotion.bfaa_kotlin_tmdb.data.source.repository.Status
 import com.zeroemotion.bfaa_kotlin_tmdb.databinding.FragmentDetailMovieBinding
 import com.zeroemotion.bfaa_kotlin_tmdb.util.getProgressDrawable
 import com.zeroemotion.bfaa_kotlin_tmdb.util.loadImage
@@ -46,9 +47,11 @@ class DetailMovieFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.getMovieDetail().observe(viewLifecycleOwner, Observer { response ->
-            response?.let {
-                setMovieData(it)
+        viewModel.getMovieDetail().observe(viewLifecycleOwner, Observer {state ->
+            if (state != null){
+                when(state.status){
+                    Status.SUCCESS -> setMovieData(state.data)
+                }
             }
         })
     }

@@ -6,9 +6,8 @@ import com.zeroemotion.bfaa_kotlin_tmdb.data.model.Response
 import com.zeroemotion.bfaa_kotlin_tmdb.data.model.TvShow
 
 interface MovieRepository {
-    fun fetchMovieList(): LiveData<Response<Movie>>
-    fun fetchTvList(): LiveData<Response<TvShow>>
-    fun fetchMovieDetail(id: Int): LiveData<Movie>
-    fun fetchTvDetail(id: Int): LiveData<TvShow>
-    fun getNetworkState(): LiveData<NetworkState>
+    fun fetchMovieList(): LiveData<NetworkState<List<Movie>>>
+    fun fetchTvList(): LiveData<NetworkState<List<TvShow>>>
+    fun fetchMovieDetail(id: Int): LiveData<NetworkState<Movie>>
+    fun fetchTvDetail(id: Int): LiveData<NetworkState<TvShow>>
 }

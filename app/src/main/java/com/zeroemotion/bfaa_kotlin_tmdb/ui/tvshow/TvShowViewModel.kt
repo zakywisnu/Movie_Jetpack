@@ -10,8 +10,6 @@ import com.zeroemotion.bfaa_kotlin_tmdb.data.source.repository.NetworkState
 class TvShowViewModel(private val movieRepository: MovieRepository) : ViewModel() {
 
     private fun getRepo() = movieRepository.fetchTvList()
-    fun getTvs(): LiveData<Response<TvShow>> = getRepo()
+    fun getTvs(): LiveData<NetworkState<List<TvShow>>> = getRepo()
 
-    val networkState: LiveData<NetworkState> =
-        movieRepository.getNetworkState()
 }

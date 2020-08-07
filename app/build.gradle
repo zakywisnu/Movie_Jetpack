@@ -100,6 +100,7 @@ dependencies {
 
     // Koin for Unit tests
     testImplementation "org.koin:koin-test:$koinVersion"
+    androidTestImplementation "org.koin:koin-test:$koinVersion"
 
     //mockito
     testImplementation "androidx.arch.core:core-testing:$archLifecycleVersion"
@@ -112,6 +113,10 @@ dependencies {
     implementation "androidx.preference:preference:$preference_version"
 
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
+
+    //mockwebserver
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:$mockwebserver_version"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$mockwebserver_version"
 
     androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"

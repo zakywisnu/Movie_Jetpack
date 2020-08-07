@@ -6,13 +6,13 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class TvShow(
-    val id: Int?,
-    val name: String?,
-    val overview: String?,
+    val id: Int,
+    val name: String,
+    val overview: String,
     @SerializedName("poster_path")
-    val posterPath: String?,
+    val posterPath: String,
     @SerializedName("first_air_date")
-    val firstAirDate: String?,
+    val firstAirDate: String,
     @SerializedName("vote_average")
-    val voteAverage: String?
+    val voteAverage: String
 ) : Parcelable
