@@ -1,112 +1,63 @@
 package com.zeroemotion.bfaa_kotlin_tmdb.data.source.remote
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.zeroemotion.bfaa_kotlin_tmdb.data.model.Movie
-import com.zeroemotion.bfaa_kotlin_tmdb.data.model.Response
 import com.zeroemotion.bfaa_kotlin_tmdb.data.model.TvShow
-import com.zeroemotion.bfaa_kotlin_tmdb.data.source.repository.NetworkState
 import com.zeroemotion.bfaa_kotlin_tmdb.util.EspressoIdlingResource
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
+import retrofit2.await
 
 class RemoteDataSource {
     private val retrofit: Retrofit = MovieService.instance
     private val movieService = retrofit.create(MovieApi::class.java)
-    private val disposable = CompositeDisposable()
 
-    fun getMovieList(): LiveData<NetworkState<List<Movie>>> {
+    suspend fun getMovieList(callback: LoadPopularMovies) {
         EspressoIdlingResource.increment()
-        val movieResult = MutableLiveData<NetworkState<List<Movie>>>()
-        disposable.add(
-            movieService.getMovie()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ movie ->
-                    movie?.let {
-                        movieResult.value = NetworkState.success(it.results)
-                        EspressoIdlingResource.decrement()
-                    }
-                }, {
-                    it.message?.let { its ->
-                        val list = ArrayList<Movie>()
-                        movieResult.value = NetworkState.error(its, list)
-                        EspressoIdlingResource.decrement()
-                    }
-                })
-        )
-        return movieResult
+        movieService.getMovie().await().results.let {
+            callback.onAllMoviesReceived(it)
+            EspressoIdlingResource.decrement()
+        }
     }
 
-    fun getMovieDetail(id: Int): LiveData<NetworkState<Movie>>{
+    suspend fun getMovieDetail(id: Int, callback: LoadMovieDetailCallback) {
         EspressoIdlingResource.increment()
-        val movies = MutableLiveData<NetworkState<Movie>>()
-        disposable.add(
-            movieService.getMovieDetail(id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({movie ->
-                    movie?.let {
-                        movies.value = NetworkState.success(it)
-                        EspressoIdlingResource.decrement()
-                    }
-                }, {
-                    it.message?.let { its ->
-                        val movies2 = Movie(1,"","","","","")
-                        movies.value = NetworkState.error(its, movies2)
-                        EspressoIdlingResource.decrement()
-                    }
-                })
-        )
-        return movies
+        movieService.getMovieDetail(id)
+            .await().let {
+                callback.onMovieDetailReceived(it)
+                EspressoIdlingResource.decrement()
+            }
     }
 
-    fun getTvList(): LiveData<NetworkState<List<TvShow>>> {
+    suspend fun getTvList(callback: LoadPopularTvShow) {
         EspressoIdlingResource.increment()
-        val tvResult = MutableLiveData<NetworkState<List<TvShow>>>()
-        disposable.add(
-            movieService.getTvShow()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ tvs ->
-                    tvs?.let {
-                        tvResult.value = NetworkState.success(it.results)
-                        EspressoIdlingResource.decrement()
-                    }
-                }, {
-                    it.message?.let { it1 ->
-                        val list = ArrayList<TvShow>()
-                        tvResult.value = NetworkState.error(it1, list)
-                        EspressoIdlingResource.decrement()
-                    }
-                })
-        )
-        return tvResult
+        movieService.getTvShow()
+            .await().results.let { listTv ->
+                callback.onAllTvShowsReceived(listTv)
+                EspressoIdlingResource.decrement()
+            }
     }
 
-    fun getTvDetail(id: Int) : LiveData<NetworkState<TvShow>> {
+    suspend fun getTvDetail(id: Int, callback: LoadTvShowDetailCallback) {
         EspressoIdlingResource.increment()
-        val tvShow = MutableLiveData<NetworkState<TvShow>>()
-        disposable.add(
-            movieService.getTvDetail(id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({tvs ->
-                    tvs.let {
-                        tvShow.value = NetworkState.success(it)
-                        EspressoIdlingResource.decrement()
-                    }
+        movieService.getTvDetail(id)
+            .await().let {
+                callback.onTvShowDetailReceived(it)
+                EspressoIdlingResource.decrement()
+            }
+    }
 
-                }, {
-                    it.message?.let { its ->
-                    val tvshows = TvShow(1,"","","","","")
-                   tvShow.value = NetworkState.error(its, tvshows)
-                    EspressoIdlingResource.decrement()
-                }
-                })
-        )
-        return tvShow
+    interface LoadPopularMovies {
+        fun onAllMoviesReceived(movieResponse: List<Movie>)
+    }
+
+    interface LoadMovieDetailCallback {
+        fun onMovieDetailReceived(movieResponse: Movie)
+    }
+
+    interface LoadPopularTvShow {
+        fun onAllTvShowsReceived(tvShowResponse: List<TvShow>)
+    }
+
+    interface LoadTvShowDetailCallback {
+        fun onTvShowDetailReceived(tvShowResponse: TvShow)
     }
 }

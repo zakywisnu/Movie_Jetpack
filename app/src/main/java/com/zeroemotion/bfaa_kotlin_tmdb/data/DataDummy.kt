@@ -1,6 +1,5 @@
 package com.zeroemotion.bfaa_kotlin_tmdb.data
 
-import com.zeroemotion.bfaa_kotlin_tmdb.R
 import com.zeroemotion.bfaa_kotlin_tmdb.data.model.Movie
 import com.zeroemotion.bfaa_kotlin_tmdb.data.model.TvShow
 
@@ -176,6 +175,14 @@ object DataDummy {
 
         return arrayListOf(
             TvShow(
+                1622,
+                "Supernatural",
+                "When they were boys, Sam and Dean Winchester lost their mother to a mysterious and demonic supernatural force. Subsequently, their father raised them to be soldiers. He taught them about the paranormal evil that lives in the dark corners and on the back roads of America ... and he taught them how to kill it. Now, the Winchester brothers crisscross the country in their '67 Chevy Impala, battling every kind of supernatural threat they encounter along the way. ",
+                "/KoYWXbnYuS3b0GyQPkbuexlVK9.jpg",
+                "2005-09-13",
+                "7.9"
+            ),
+            TvShow(
                 2734,
                 "Law & Order: Special Victims Unit",
                 "In the criminal justice system, sexually-based offenses are considered especially heinous. In New York City, the dedicated detectives who investigate these vicious felonies are members of an elite squad known as the Special Victims Unit. These are their stories.",
@@ -193,60 +200,13 @@ object DataDummy {
             ),
             TvShow(
                 1668,
-                "Friends",
-                "The misadventures of a group of friends as they navigate the pitfalls of work, life and love in Manhattan.",
-                "/f496cm9enuEsZkSPzCwnTESEK5s.jpg",
-                "1994-09-22",
-                "8.2"
-            ),
-            TvShow(
-                1668,
-                "Friends",
-                "The misadventures of a group of friends as they navigate the pitfalls of work, life and love in Manhattan.",
-                "/f496cm9enuEsZkSPzCwnTESEK5s.jpg",
-                "1994-09-22",
-                "8.2"
-            ),
-            TvShow(
-                1668,
-                "Friends",
-                "The misadventures of a group of friends as they navigate the pitfalls of work, life and love in Manhattan.",
-                "/f496cm9enuEsZkSPzCwnTESEK5s.jpg",
-                "1994-09-22",
-                "8.2"
-            ),
-            TvShow(
-                1668,
-                "Friends",
-                "The misadventures of a group of friends as they navigate the pitfalls of work, life and love in Manhattan.",
-                "/f496cm9enuEsZkSPzCwnTESEK5s.jpg",
-                "1994-09-22",
-                "8.2"
-            ),
-            TvShow(
-                1668,
-                "Friends",
-                "The misadventures of a group of friends as they navigate the pitfalls of work, life and love in Manhattan.",
-                "/f496cm9enuEsZkSPzCwnTESEK5s.jpg",
-                "1994-09-22",
-                "8.2"
-            ),
-            TvShow(
-                1668,
                 "The Simpsons",
                 "Set in Springfield, the average American town, the show focuses on the antics and everyday adventures of the Simpson family; Homer, Marge, Bart, Lisa and Maggie, as well as a virtual cast of thousands. Since the beginning, the series has been a pop culture icon, attracting hundreds of celebrities to guest star. The show has also made name for itself in its fearless satirical take on politics, media and American life in general.",
                 "/qcr9bBY6MVeLzriKCmJOv1562uY.jpg",
                 "1989-12-17",
                 "7.6"
             ),
-            TvShow(
-                1622,
-                "Supernatural",
-                "When they were boys, Sam and Dean Winchester lost their mother to a mysterious and demonic supernatural force. Subsequently, their father raised them to be soldiers. He taught them about the paranormal evil that lives in the dark corners and on the back roads of America ... and he taught them how to kill it. Now, the Winchester brothers crisscross the country in their '67 Chevy Impala, battling every kind of supernatural threat they encounter along the way. ",
-                "/KoYWXbnYuS3b0GyQPkbuexlVK9.jpg",
-                "2005-09-13",
-                "7.9"
-            ),
+
             TvShow(
                 1416,
                 "Grey's Anatomy",

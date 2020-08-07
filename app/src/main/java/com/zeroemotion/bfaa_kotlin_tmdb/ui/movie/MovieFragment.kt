@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.zeroemotion.bfaa_kotlin_tmdb.R
-import com.zeroemotion.bfaa_kotlin_tmdb.data.source.repository.Status
 import com.zeroemotion.bfaa_kotlin_tmdb.databinding.FragmentMovieBinding
 import kotlinx.android.synthetic.main.fragment_movie.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,7 +25,7 @@ class MovieFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dataBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_movie, container, false)
+        dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie, container, false)
         return dataBinding.root
     }
 
@@ -34,7 +33,7 @@ class MovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         rvMovie.apply {
-            layoutManager = GridLayoutManager(context,2)
+            layoutManager = GridLayoutManager(context, 2)
             adapter = movieAdapter
         }
 
@@ -42,20 +41,10 @@ class MovieFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.getMovie().observe(viewLifecycleOwner, Observer { state ->
-            if (state != null){
-                when(state.status){
-                    Status.LOADING -> movieLoading.visibility = View.VISIBLE
-                    Status.SUCCESS -> {
-                        rvMovie.visibility = View.VISIBLE
-                        movieLoading.visibility = View.GONE
-                        state.data?.let { movieAdapter.updateMovieList(it) }
-                    }
-                    Status.FAILED -> {
-                        movieLoading.visibility = View.GONE
-                        movieError.visibility = View.VISIBLE
-                    }
-                }
+        viewModel.getMovie().observe(viewLifecycleOwner, Observer { movie ->
+            movie?.let {
+                rvMovie.visibility = View.VISIBLE
+                movieAdapter.updateMovieList(it)
             }
         })
     }

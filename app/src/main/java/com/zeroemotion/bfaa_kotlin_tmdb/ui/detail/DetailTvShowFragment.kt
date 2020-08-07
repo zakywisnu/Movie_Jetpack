@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.zeroemotion.bfaa_kotlin_tmdb.R
 import com.zeroemotion.bfaa_kotlin_tmdb.data.model.TvShow
-import com.zeroemotion.bfaa_kotlin_tmdb.data.source.repository.Status
 import com.zeroemotion.bfaa_kotlin_tmdb.databinding.FragmentDetailTvShowBinding
 import com.zeroemotion.bfaa_kotlin_tmdb.util.getProgressDrawable
 import com.zeroemotion.bfaa_kotlin_tmdb.util.loadImage
@@ -47,11 +46,9 @@ class DetailTvShowFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.getTvDetail().observe(viewLifecycleOwner, Observer { state ->
-            if (state != null) {
-                when (state.status) {
-                    Status.SUCCESS -> setTvData(state.data)
-                }
+        viewModel.getTvDetail().observe(viewLifecycleOwner, Observer { tvs ->
+            tvs?.let {
+                setTvData(it)
             }
         })
     }

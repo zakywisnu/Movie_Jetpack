@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.zeroemotion.bfaa_kotlin_tmdb.R
-import com.zeroemotion.bfaa_kotlin_tmdb.data.source.repository.NetworkState
-import com.zeroemotion.bfaa_kotlin_tmdb.data.source.repository.Status
 import com.zeroemotion.bfaa_kotlin_tmdb.databinding.FragmentTvShowBinding
 import kotlinx.android.synthetic.main.fragment_tv_show.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -40,20 +38,10 @@ class TvShowFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.getTvs().observe(viewLifecycleOwner, Observer {state ->
-            if (state != null){
-                when(state.status){
-                    Status.LOADING -> tvLoading.visibility = View.VISIBLE
-                    Status.SUCCESS -> {
-                        tvLoading.visibility = View.GONE
-                        rvTvShow.visibility = View.VISIBLE
-                        state.data?.let { tvAdapter.updateTvList(it) }
-                    }
-                    Status.FAILED -> {
-                        tvLoading.visibility = View.GONE
-                        tvError.visibility = View.VISIBLE
-                    }
-                }
+        viewModel.getTvs().observe(viewLifecycleOwner, Observer { tvs ->
+            tvs?.let {
+                rvTvShow.visibility = View.VISIBLE
+                tvAdapter.updateTvList(it)
             }
         })
     }
