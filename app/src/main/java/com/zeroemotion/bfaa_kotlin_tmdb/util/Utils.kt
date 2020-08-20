@@ -31,3 +31,8 @@ fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable
 fun loadImage(view: ImageView, urlString: String?) {
     view.loadImage(urlString, getProgressDrawable(view.context))
 }
+
+object Api{
+    const val PAGE = 1
+    const val LANGUAGE = "en-US"
+}

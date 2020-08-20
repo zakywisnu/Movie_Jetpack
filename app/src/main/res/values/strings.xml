@@ -10,4 +10,5 @@
     <string name="release_date">Release Date</string>
     <string name="rating">Rating</string>
     <string name="connection_problem">Connection Problem</string>
+    <string name="favorite">Favorite</string>
 </resources>

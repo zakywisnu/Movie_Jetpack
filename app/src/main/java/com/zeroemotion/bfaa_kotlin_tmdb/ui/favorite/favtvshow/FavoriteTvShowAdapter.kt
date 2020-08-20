@@ -1,4 +1,4 @@
-package com.zeroemotion.bfaa_kotlin_tmdb.ui.tvshow
+package com.zeroemotion.bfaa_kotlin_tmdb.ui.favorite.favtvshow
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,13 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zeroemotion.bfaa_kotlin_tmdb.R
 import com.zeroemotion.bfaa_kotlin_tmdb.data.source.local.entity.TvShowEntity
 import com.zeroemotion.bfaa_kotlin_tmdb.databinding.TvshowItemBinding
+import com.zeroemotion.bfaa_kotlin_tmdb.ui.favorite.FavoriteFragmentDirections
 import com.zeroemotion.bfaa_kotlin_tmdb.util.CustomOnClick
 import com.zeroemotion.bfaa_kotlin_tmdb.util.getProgressDrawable
 import com.zeroemotion.bfaa_kotlin_tmdb.util.loadImage
 import kotlinx.android.synthetic.main.tvshow_item.view.*
 
-class TvShowAdapter() :
-    PagedListAdapter<TvShowEntity, TvShowAdapter.TvShowViewHolder>(TvShowDiffCallback()),
+class FavoriteTvShowAdapter() :
+    PagedListAdapter<TvShowEntity, FavoriteTvShowAdapter.TvShowViewHolder>(TvShowDiffCallback()),
     CustomOnClick {
 
 
@@ -45,7 +46,7 @@ class TvShowAdapter() :
 
     override fun onViewClicked(v: View) {
         val tvId = v.tvId.text.toString().toInt()
-        val action = TvShowFragmentDirections.actionDetailTvShow()
+        val action = FavoriteFragmentDirections.actionDetailFavTvShow()
         action.tvId = tvId
         Navigation.findNavController(v).navigate(action)
     }
@@ -62,3 +63,5 @@ class TvShowAdapter() :
 
     }
 }
+
+

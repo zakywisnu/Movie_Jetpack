@@ -10,14 +10,14 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.zeroemotion.bfaa_kotlin_tmdb.R
 import com.zeroemotion.bfaa_kotlin_tmdb.databinding.FragmentMovieBinding
+import com.zeroemotion.bfaa_kotlin_tmdb.vo.Status
 import kotlinx.android.synthetic.main.fragment_movie.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieFragment : Fragment() {
 
     private val viewModel: MovieViewModel by viewModel()
-    private var movieAdapter =
-        MovieAdapter(arrayListOf())
+    private val movieAdapter = MovieAdapter()
     private lateinit var dataBinding: FragmentMovieBinding
 
 
@@ -41,10 +41,20 @@ class MovieFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.getMovie().observe(viewLifecycleOwner, Observer { movie ->
-            movie?.let {
-                rvMovie.visibility = View.VISIBLE
-                movieAdapter.updateMovieList(it)
+        viewModel.getMovie().observe(viewLifecycleOwner, Observer { movies ->
+            if (movies != null) {
+                when (movies.status) {
+                    Status.LOADING -> movieLoading.visibility = View.VISIBLE
+                    Status.ERROR -> {
+                        movieError.visibility = View.VISIBLE
+                        movieLoading.visibility = View.GONE
+                    }
+                    Status.SUCCESS -> {
+                        movieLoading.visibility = View.GONE
+                        movieAdapter.submitList(movies.data)
+                        movieAdapter.notifyDataSetChanged()
+                    }
+                }
             }
         })
     }

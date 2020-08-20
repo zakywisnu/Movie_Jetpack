@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/detailMovieFragment"
         android:name="com.zeroemotion.bfaa_kotlin_tmdb.ui.detail.DetailMovieFragment"
-        android:label="fragment_detail_movie"
+        android:label="Detail Movie"
         tools:layout="@layout/fragment_detail_movie" >
         <argument
             android:name="movieId"
@@ -38,11 +38,22 @@
     <fragment
         android:id="@+id/detailTvShowFragment"
         android:name="com.zeroemotion.bfaa_kotlin_tmdb.ui.detail.DetailTvShowFragment"
-        android:label="fragment_detail_tv_show"
+        android:label="Detail TV Show"
         tools:layout="@layout/fragment_detail_tv_show" >
         <argument
             android:name="tvId"
             android:defaultValue="0"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.zeroemotion.bfaa_kotlin_tmdb.ui.favorite.FavoriteFragment"
+        android:label="FavoriteFragment" >
+        <action
+            android:id="@+id/actionDetailFavMovie"
+            app:destination="@id/detailMovieFragment" />
+        <action
+            android:id="@+id/actionDetailFavTvShow"
+            app:destination="@id/detailTvShowFragment" />
     </fragment>
 </navigation>

@@ -8,20 +8,20 @@ object DataDummy {
 
         return arrayListOf(
             Movie(
+                612706,
+                "Work It",
+                "A brilliant but clumsy high school senior vows to get into her late father's alma mater by transforming herself and a misfit squad into dance champions.",
+                "/b5XfICAvUe8beWExBz97i0Qw4Qh.jpg",
+                "2020-08-07",
+                "8.1"
+            ),
+            Movie(
                 583083,
                 "The Kissing Booth 2",
                 "With college decisions looming, Elle juggles her long-distance romance with Noah, changing relationship with bestie Lee and feelings for a new classmate.",
                 "/mb7wQv0adK3kjOUr9n93mANHhPJ.jpg",
                 "2020-07-24",
                 "8.2"
-            ),
-            Movie(
-                300671,
-                "13 Hours: The Secret Soldiers of Benghazi",
-                "An American Ambassador is killed during an attack at a U.S. compound in Libya as a security team struggles to make sense out of the chaos.",
-                "/4qnEeVPM8Yn5dIVC4k4yyjrUXeR.jpg",
-                "2016-01-13",
-                "7.1"
             ),
             Movie(
                 516486,
@@ -175,14 +175,6 @@ object DataDummy {
 
         return arrayListOf(
             TvShow(
-                1622,
-                "Supernatural",
-                "When they were boys, Sam and Dean Winchester lost their mother to a mysterious and demonic supernatural force. Subsequently, their father raised them to be soldiers. He taught them about the paranormal evil that lives in the dark corners and on the back roads of America ... and he taught them how to kill it. Now, the Winchester brothers crisscross the country in their '67 Chevy Impala, battling every kind of supernatural threat they encounter along the way. ",
-                "/KoYWXbnYuS3b0GyQPkbuexlVK9.jpg",
-                "2005-09-13",
-                "7.9"
-            ),
-            TvShow(
                 2734,
                 "Law & Order: Special Victims Unit",
                 "In the criminal justice system, sexually-based offenses are considered especially heinous. In New York City, the dedicated detectives who investigate these vicious felonies are members of an elite squad known as the Special Victims Unit. These are their stories.",
@@ -190,6 +182,15 @@ object DataDummy {
                 "1999-09-20",
                 "7.2"
             ),
+            TvShow(
+                1416,
+                "Grey's Anatomy",
+                "Follows the personal and professional lives of a group of doctors at Seattle’s Grey Sloan Memorial Hospital.",
+                "/jnsvc7gCKocXnrTXF6p03cICTWb.jpg",
+                "2005-03-27",
+                "7.9"
+            ),
+
             TvShow(
                 1668,
                 "Friends",

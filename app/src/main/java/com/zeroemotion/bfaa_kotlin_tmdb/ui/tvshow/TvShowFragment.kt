@@ -10,14 +10,14 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.zeroemotion.bfaa_kotlin_tmdb.R
 import com.zeroemotion.bfaa_kotlin_tmdb.databinding.FragmentTvShowBinding
+import com.zeroemotion.bfaa_kotlin_tmdb.vo.Status
 import kotlinx.android.synthetic.main.fragment_tv_show.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TvShowFragment : Fragment() {
 
     private val viewModel: TvShowViewModel by viewModel()
-    private var tvAdapter =
-        TvShowAdapter(arrayListOf())
+    private val tvAdapter = TvShowAdapter()
     private lateinit var dataBinding: FragmentTvShowBinding
 
     override fun onCreateView(
@@ -39,9 +39,19 @@ class TvShowFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.getTvs().observe(viewLifecycleOwner, Observer { tvs ->
-            tvs?.let {
-                rvTvShow.visibility = View.VISIBLE
-                tvAdapter.updateTvList(it)
+            if (tvs != null){
+                when(tvs.status){
+                    Status.LOADING -> tvLoading.visibility = View.VISIBLE
+                    Status.ERROR -> {
+                        tvLoading.visibility = View.GONE
+                        tvError.visibility = View.VISIBLE
+                    }
+                    Status.SUCCESS -> {
+                        tvLoading.visibility = View.GONE
+                        tvAdapter.submitList(tvs.data)
+                        tvAdapter.notifyDataSetChanged()
+                    }
+                }
             }
         })
     }

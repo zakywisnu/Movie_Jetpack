@@ -7,7 +7,7 @@
 
         <variable
             name="tvShow"
-            type="com.zeroemotion.bfaa_kotlin_tmdb.data.model.TvShow" />
+            type="com.zeroemotion.bfaa_kotlin_tmdb.data.source.local.entity.TvShowEntity" />
 
         <variable
             name="listener"

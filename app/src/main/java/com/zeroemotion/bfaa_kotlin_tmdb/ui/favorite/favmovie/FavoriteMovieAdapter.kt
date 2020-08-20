@@ -1,4 +1,4 @@
-package com.zeroemotion.bfaa_kotlin_tmdb.ui.movie
+package com.zeroemotion.bfaa_kotlin_tmdb.ui.favorite.favmovie
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,15 +9,17 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.zeroemotion.bfaa_kotlin_tmdb.R
-import com.zeroemotion.bfaa_kotlin_tmdb.data.model.Movie
 import com.zeroemotion.bfaa_kotlin_tmdb.data.source.local.entity.MovieEntity
 import com.zeroemotion.bfaa_kotlin_tmdb.databinding.MovieItemBinding
+import com.zeroemotion.bfaa_kotlin_tmdb.ui.favorite.FavoriteFragmentDirections
+import com.zeroemotion.bfaa_kotlin_tmdb.ui.movie.MovieFragmentDirections
 import com.zeroemotion.bfaa_kotlin_tmdb.util.CustomOnClick
 import com.zeroemotion.bfaa_kotlin_tmdb.util.getProgressDrawable
 import com.zeroemotion.bfaa_kotlin_tmdb.util.loadImage
 import kotlinx.android.synthetic.main.movie_item.view.*
 
-class MovieAdapter() : PagedListAdapter<MovieEntity, MovieAdapter.MovieViewHolder>(MovieDiffCallback()), CustomOnClick {
+class FavoriteMovieAdapter() : PagedListAdapter<MovieEntity, FavoriteMovieAdapter.MovieViewHolder>(MovieDiffCallback()),
+    CustomOnClick {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -42,7 +44,7 @@ class MovieAdapter() : PagedListAdapter<MovieEntity, MovieAdapter.MovieViewHolde
 
     override fun onViewClicked(v: View) {
         val movieId = v.movieId.text.toString().toInt()
-        val action = MovieFragmentDirections.actionDetailMovie()
+        val action = FavoriteFragmentDirections.actionDetailFavMovie()
         action.movieId = movieId
         Navigation.findNavController(v).navigate(action)
     }

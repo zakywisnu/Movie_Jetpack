@@ -7,7 +7,7 @@
 
         <variable
             name="movie"
-            type="com.zeroemotion.bfaa_kotlin_tmdb.data.model.Movie" />
+            type="com.zeroemotion.bfaa_kotlin_tmdb.data.source.local.entity.MovieEntity" />
 
         <variable
             name="listener"
