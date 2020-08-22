@@ -3,10 +3,14 @@ package com.zeroemotion.bfaa_kotlin_tmdb.ui.tvshow
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.paging.PagedList
 import com.nhaarman.mockitokotlin2.verify
 import com.zeroemotion.bfaa_kotlin_tmdb.data.DataDummy
 import com.zeroemotion.bfaa_kotlin_tmdb.data.model.TvShow
+import com.zeroemotion.bfaa_kotlin_tmdb.data.source.local.entity.TvShowEntity
 import com.zeroemotion.bfaa_kotlin_tmdb.data.source.repository.MovieRepositoryImpl
+import com.zeroemotion.bfaa_kotlin_tmdb.vo.Resource
+import io.mockk.coEvery
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
@@ -17,9 +21,8 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
+@RunWith(MockitoJUnitRunner.Silent::class)
 class TvShowViewModelTest {
-    private val dummyTvs = DataDummy.generateDummyTvShow()
     private lateinit var viewModel: TvShowViewModel
 
     @get:Rule
@@ -29,7 +32,7 @@ class TvShowViewModelTest {
     private lateinit var movieRepositoryImpl: MovieRepositoryImpl
 
     @Mock
-    private lateinit var observer: Observer<List<TvShow>>
+    private lateinit var tvPagedList: PagedList<TvShowEntity>
 
     @Before
     fun start() {
@@ -38,19 +41,15 @@ class TvShowViewModelTest {
 
     @Test
     fun getTvList() {
-        val tvs = MutableLiveData<List<TvShow>>()
-        tvs.value = dummyTvs
+        val tv = Resource.succes(tvPagedList)
+        coEvery { tv.data?.size } returns 20
+        val tvs = MutableLiveData<Resource<PagedList<TvShowEntity>>>()
+        tvs.value = tv
 
-        Mockito.`when`(movieRepositoryImpl.fetchTvList()).thenReturn(tvs)
-
-        val listMovie = viewModel.getTvs().value
-
-        verify(movieRepositoryImpl).fetchTvList()
-        assertNotNull(listMovie)
-        assertEquals(20, listMovie?.size)
-
-        viewModel.getTvs().observeForever(observer)
-        verify(observer).onChanged(dummyTvs)
+        coEvery { movieRepositoryImpl.getTvList() } returns tvs
+        viewModel.getTvs().observeForever{}
+        assertNotNull(viewModel.getTvs())
+        assertEquals(viewModel.getTvs(), tv)
     }
 
 }

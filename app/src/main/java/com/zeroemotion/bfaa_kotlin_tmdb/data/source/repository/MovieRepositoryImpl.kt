@@ -129,6 +129,4 @@ class MovieRepositoryImpl(
         appExecutors.diskIO().execute {
             localDataSource.setFavoriteTvShow(tvs, state)
         }
-
-
 }

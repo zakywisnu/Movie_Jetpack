@@ -11,4 +11,6 @@
     <string name="rating">Rating</string>
     <string name="connection_problem">Connection Problem</string>
     <string name="favorite">Favorite</string>
+    <string name="favorite_movie">Favorite Movie</string>
+    <string name="favorite_tv">Favorite Tv Show</string>
 </resources>
