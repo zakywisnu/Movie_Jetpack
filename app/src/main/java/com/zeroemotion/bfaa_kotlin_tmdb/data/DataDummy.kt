@@ -8,12 +8,12 @@ object DataDummy {
 
         return arrayListOf(
             Movie(
-                612706,
-                "Work It",
-                "A brilliant but clumsy high school senior vows to get into her late father's alma mater by transforming herself and a misfit squad into dance champions.",
-                "/b5XfICAvUe8beWExBz97i0Qw4Qh.jpg",
-                "2020-08-07",
-                "8.1"
+                605116,
+                "Project Power",
+                "An ex-soldier, a teen and a cop collide in New Orleans as they hunt for the source behind a dangerous new pill that grants users temporary superpowers.",
+                "/bOKjzWDxiDkgEQznhzP4kdeAHNI.jpg",
+                "2020-08-14",
+                "6.8"
             ),
             Movie(
                 583083,
@@ -340,22 +340,4 @@ object DataDummy {
         )
     }
 
-    fun getMovieById(id: Int?): Movie? {
-        for (movie in generateDummyMovies()) {
-            if (id == movie.id) {
-                return movie
-            }
-        }
-        return null
-    }
-
-    fun getTvShowById(id: Int?): TvShow? {
-
-        for (movie in generateDummyTvShow()) {
-            if (id == movie.id) {
-                return movie
-            }
-        }
-        return null
-    }
 }
